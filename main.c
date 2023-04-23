@@ -11,6 +11,8 @@ struct processo {
     int tempoChegada;
     int tempoExecucao;
     int tempoRestante;
+    int turnAround;
+    //int TEP;
 };
 /*ATRIBUIR VALORES NOS PROCESSOS*/
 void preencher_processos(struct processo *processos, int numProcesso) {
@@ -19,6 +21,8 @@ void preencher_processos(struct processo *processos, int numProcesso) {
         scanf("%d%d", &processos[i].tempoChegada, &processos[i].tempoExecucao);
         processos[i].pid = i + 1;
         processos[i].tempoRestante = processos[i].tempoExecucao;
+        processos[i].turnAround = processos[i].tempoExecucao;
+        //processos[i].TEP = processos[i].turnAround - processos[i].tempoChegada - processos[i].tempoExecucao;
     }
 }
 int main() {
@@ -53,6 +57,11 @@ int main() {
         }
     }
 
+    for (int j = 0; j < numProcesso; j++) {
+        printf("Turnaroud processo %d : %d\n", j+1, processos[j].turnAround);
+        //printf("TEP processo %d : %d\n", j+1, processos[j].TEP);
+
+    }
     //O que sera apresentado ao usuario final
     headerEscalonamento();
     printf("Tempo medio de espera: %.2f\n", (float) TME / numProcesso);
